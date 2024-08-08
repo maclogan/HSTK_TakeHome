@@ -1,8 +1,8 @@
 import { SafeAreaView, Text, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import localPlaceholderData from "../../localPlaceholderData";
-import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { AntDesign } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
     post: {
@@ -34,7 +34,7 @@ const Post = ({post}) => {
                 <Text style={{fontWeight: 'bold', fontSize: 20}}>{title}</Text>
                 <Text>{body}</Text>
             </View>
-            <Entypo name="chevron-right" size={24} color="black" />
+            <AntDesign name="right" size={24} color="black" />
         </SafeAreaView>
     )
 }

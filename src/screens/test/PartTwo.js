@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
 const Post = ({post}) => {
     const { title, body } = post
     return (
-        <SafeAreaView style={styles.post}>
+        <View style={styles.post}>
             <MaterialCommunityIcons name="post-outline" size={24} color="black" />
             <View style={styles.postText}>
                 <Text style={{fontWeight: 'bold', fontSize: 20}}>{title}</Text>
                 <Text>{body}</Text>
             </View>
             <AntDesign name="right" size={24} color="black" />
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -79,28 +79,29 @@ export default function () {
             <Text>
                 Part Two
             </Text>
-            {isLoading ? (
-                <ActivityIndicator size="large" />
-            ) : ( 
-                filteredPosts ?     
-                    (       
-                        <FlatList
-                            ListHeaderComponent={
-                                <TextInput 
-                                    onChangeText={filterResults} 
-                                    style={styles.textInput } 
-                                    placeholder="Type to filter posts"
-                                /> 
-                            }
-                            data = {filteredPosts}
-                            renderItem={({item}) => <Post post={item} />}
-                            keyExtractor={item => item.id}
-                            ListEmptyComponent={<Text style={{padding: 10, margin: 12}}>No results</Text>}
-                        />
-                    ) : (
-                        <Text>Something went wrong, check the console for more information</Text>
+            {
+                isLoading ? (
+                    <ActivityIndicator size="large" />
+                ) : ( 
+                    filteredPosts ?     
+                        (       
+                            <FlatList
+                                ListHeaderComponent={
+                                    <TextInput 
+                                        onChangeText={filterResults} 
+                                        style={styles.textInput } 
+                                        placeholder="Type to filter posts"
+                                    /> 
+                                }
+                                data = {filteredPosts}
+                                renderItem={({item}) => <Post post={item} />}
+                                keyExtractor={item => item.id}
+                                ListEmptyComponent={<Text style={{padding: 10, margin: 12}}>No results</Text>}
+                            />
+                        ) : (
+                            <Text>Something went wrong, check the console for more information</Text>
+                        )
                     )
-                )
             }
         </SafeAreaView>
     )

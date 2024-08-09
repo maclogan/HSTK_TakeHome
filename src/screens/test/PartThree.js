@@ -40,14 +40,14 @@ const Post = ({post}) => {
         <Pressable onPress={() => {
             navigation.navigate('part-three-detail', {postId: id});
         }}>
-            <SafeAreaView style={styles.post}>
+            <View style={styles.post}>
                 <MaterialCommunityIcons name="post-outline" size={24} color="black" />
                 <View style={styles.postText}>
                     <Text style={{fontWeight: 'bold', fontSize: 20}}>{title}</Text>
                     <Text>{body}</Text>
                 </View>
                 <AntDesign name="right" size={24} color="black" />
-            </SafeAreaView>
+            </View>
         </Pressable>
     )
 }

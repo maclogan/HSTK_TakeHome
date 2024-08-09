@@ -25,7 +25,6 @@ export default function() {
     const { postId } = route.params
     const [ post, setPost ] = useState()
     const [ comments, setComments ] = useState()
-    const [ filteredComments, setFilteredComments ] = useState()
     const [ isLoading, setIsLoading ] = useState(true)
     const [ isLoadingComments, setIsLoadingComments ] = useState(false)
 
@@ -56,17 +55,15 @@ export default function() {
         } catch (error) {
             console.error(error)
         }
-    
-        
     }
 
     const hideComment = (commentId) => {
         setComments(prevComments =>
-          prevComments.map(comment =>
+            prevComments.map(comment =>
             comment.id === commentId ? { ...comment, show: false } : comment
-          )
+            )
         );
-      };
+    };
 
     useEffect(() => {
         getPost()
@@ -92,29 +89,32 @@ export default function() {
         })
     }
     return (
-        isLoading || isLoadingComments ? (
-            <ActivityIndicator />
-        ) : (
-            <>
-                <SafeAreaView style={styles.postText}>
-                    <Text style={{fontWeight: 'bold', fontSize: 20}}>{post.title}</Text>
-                    <Text>{post.body}</Text>
-                    <View style={{height: 1, backgroundColor: '#000', marginVertical: 10}} />
-                    <FlatList 
-                        data={getFilteredComments()} 
-                        renderItem={({item}) => (
-                            <View style={styles.comment}>
-                                <Text style={{fontWeight: 'bold'}}>{item.email}</Text>
-                                <Text>{item.body}</Text>
-                                <Button onPress={() => hideComment(item.id)} title = {'Hide Comment'} color='rebeccapurple' />
-                            </View> 
-                        )
-                        }
-                        keyExtractor={item => item.id} 
-                    />
-                </SafeAreaView>
-            </>
-        )
-  
+        <SafeAreaView>
+            {
+                isLoading || isLoadingComments ? (
+                    <ActivityIndicator />
+                ) : (
+                    <>
+                        <View style={styles.postText}>
+                            <Text style={{fontWeight: 'bold', fontSize: 20}}>{post.title}</Text>
+                            <Text>{post.body}</Text>
+                            <View style={{height: 1, backgroundColor: '#000', marginVertical: 10}} />
+                            <FlatList 
+                                data={getFilteredComments()} 
+                                renderItem={({item}) => (
+                                    <View style={styles.comment}>
+                                        <Text style={{fontWeight: 'bold'}}>{item.email}</Text>
+                                        <Text>{item.body}</Text>
+                                        <Button onPress={() => hideComment(item.id)} title = {'Hide Comment'} color='rebeccapurple' />
+                                    </View> 
+                                )
+                                }
+                                keyExtractor={item => item.id} 
+                            />
+                        </View>
+                    </>
+                )
+            }
+        </SafeAreaView>
     )
 }
